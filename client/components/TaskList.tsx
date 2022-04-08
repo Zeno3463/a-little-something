@@ -22,10 +22,9 @@ const TaskList = () => {
 
 	const toggleDone = (index: number) => {
 		const newTasks = [...tasks];
-		const newTask = newTasks.splice(index, 1);
-		newTask[0].done = !newTask[0].done;
-		setTasks([...newTasks, newTask[0]]);
-		localStorage.setItem('tasks', JSON.stringify([...newTasks, newTask[0]]));
+		newTasks[index].done = !newTasks[index].done;
+		setTasks(newTasks);
+		localStorage.setItem('tasks', JSON.stringify(newTasks));
 	}
 
 	const refreshTasks = () => {
@@ -41,10 +40,15 @@ const TaskList = () => {
 	return <div>
 		<button onClick={refreshTasks}>refresh</button>
 		<input type="number" min={1} max={5} onChange={setTotalTasksNum} />
-		{tasks.map((task, index) => <div key={index}>
-			{!task.done ? task.name: "done"}
-			<button onClick={() => toggleDone(index)}>{task.done ? "completed" : "complete"}</button>
-		</div>)}
+		<table>
+			{tasks.map((task, index) => <tr key={index}>
+				<td className='py-5 font-light border lg:border-0 text-center lg:text-left'>{!task.done ? task.name: <s>{task.name}</s>}</td>
+				{!task.done ?
+				<td className='pl-10 border lg:border-0'>
+					<button className='bg-grey p-3 shadow-md transition-all hover:scale-110' onClick={() => toggleDone(index)}></button>
+				</td> : null}
+			</tr>)}
+		</table>
 	</div>
 }
 
