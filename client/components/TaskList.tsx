@@ -33,13 +33,8 @@ const TaskList = () => {
 		window.location.reload();
 	}
 
-	const setTotalTasksNum = (e: React.ChangeEvent<HTMLInputElement>) => {
-		localStorage.setItem('totalTasksNum', parseInt(e.target.value).toString());
-	}
-
 	return <div>
 		<button onClick={refreshTasks}>refresh</button>
-		<input type="number" min={1} max={5} onChange={setTotalTasksNum} />
 		<table>
 			{tasks.map((task, index) => <tr key={index}>
 				<td className='py-5 font-light border lg:border-0 text-center lg:text-left'>{!task.done ? task.name: <s>{task.name}</s>}</td>
