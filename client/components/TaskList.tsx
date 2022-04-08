@@ -11,7 +11,7 @@ const TaskList = () => {
 			return;
 		}
 		const newList: Array<TaskInterface> = []
-		for (let i = 0; i < 5; i++) newList.push({
+		for (let i = 0; i < parseInt(localStorage.getItem('totalTasksNum') || '0'); i++) newList.push({
 			name: list[Math.random() * list.length | 0],
 			done: false
 		});
@@ -28,7 +28,19 @@ const TaskList = () => {
 		localStorage.setItem('tasks', JSON.stringify([...newTasks, newTask[0]]));
 	}
 
+	const refreshTasks = () => {
+		localStorage.removeItem('tasks');
+		localStorage.removeItem('date');
+		window.location.reload();
+	}
+
+	const setTotalTasksNum = (e: React.ChangeEvent<HTMLInputElement>) => {
+		localStorage.setItem('totalTasksNum', parseInt(e.target.value).toString());
+	}
+
 	return <div>
+		<button onClick={refreshTasks}>refresh</button>
+		<input type="number" min={1} max={5} onChange={setTotalTasksNum} />
 		{tasks.map((task, index) => <div key={index}>
 			{!task.done ? task.name: "done"}
 			<button onClick={() => toggleDone(index)}>{task.done ? "completed" : "complete"}</button>
