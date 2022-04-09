@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react'
 
 const Settings = () => {
+	////// VARIABLES //////
 	const [totalTasksNum, setTotalTasksNum] = useState(0);
 
+	////// USE EFFECTS //////
 	useEffect(() => {
+		// get total tasks num from local storage
 		setTotalTasksNum(parseInt(localStorage.getItem('totalTasksNum') || '0'));
 	}, []);
 
+	////// FUNCTIONS //////
 	const updateTotalTasksNum = (e: React.ChangeEvent<HTMLInputElement>) => {
 		let newNum = parseInt(e.target.value);
+
+		// limit the total tasks num to be between 0 and 5
 		if (newNum < 0) newNum = 0;
 		if (newNum > 5) newNum = 5;
+		
 		setTotalTasksNum(newNum);
 		localStorage.setItem('totalTasksNum', newNum.toString());
 	}

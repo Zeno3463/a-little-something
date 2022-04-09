@@ -3,23 +3,29 @@ import list from '../data/list.json'
 import { TaskInterface } from '../interfaces';
 
 const TaskList = () => {
+	////// VARIABLES //////
 	const [tasks, setTasks] = useState<Array<TaskInterface>>([]);
 
+	////// USE EFFECTS //////
 	useEffect(() => {
+		// if there are tasks already set in local storage and it's not the next day, use the tasks in local storage
 		if (localStorage.getItem('tasks') && localStorage.getItem('date') === new Date().getDate().toString()) {
 			setTasks(JSON.parse(localStorage.getItem('tasks') as string));
 			return;
 		}
+
+		// otherwise, load in new tasks
 		const newList: Array<TaskInterface> = []
-		for (let i = 0; i < parseInt(localStorage.getItem('totalTasksNum') || '0'); i++) newList.push({
+		for (let i = 0; i < parseInt(localStorage.getItem('totalTasksNum') || '3'); i++) newList.push({
 			name: list[Math.random() * list.length | 0],
 			done: false
 		});
 		setTasks(newList);
-		localStorage.setItem('date', JSON.stringify(new Date().getDate()));
+		localStorage.setItem('date', JSON.stringify(new Date().getDate())); // set the day
 		localStorage.setItem('tasks', JSON.stringify(newList));
 	}, [])
 
+	////// FUNCTIONS //////
 	const toggleDone = (index: number) => {
 		const newTasks = [...tasks];
 		newTasks[index].done = !newTasks[index].done;
@@ -27,11 +33,12 @@ const TaskList = () => {
 		localStorage.setItem('tasks', JSON.stringify(newTasks));
 	}
 
-
 	return <div>
 		<table>
 			{tasks.map((task, index) => <tr key={index} className='animate-bounce-in opacity-0' style={{animationDelay: `${index/5}s`}}>
-				<td className='py-5 font-light border lg:border-0 text-center lg:text-left'>{!task.done ? task.name: <s>{task.name}</s>}</td>
+				<td className='py-5 font-light border lg:border-0 text-center lg:text-left'>
+					{!task.done ? task.name: <s>{task.name}</s>}
+				</td>
 				{!task.done ?
 				<td className='pl-10 border lg:border-0'>
 					<button className='bg-grey p-3 shadow-md transition-all hover:scale-110' onClick={() => toggleDone(index)}></button>

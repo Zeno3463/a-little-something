@@ -7,8 +7,10 @@ import SettingsIcon from '../public/settings_black_24dp.svg'
 import HomeIcon from '../public/home_black_24dp.svg'
 
 const Menu = () => {
+	////// VARIABLES //////
 	const [isOpen, setIsOpen] = useState(false);
 
+	////// FUNCTIONS //////
 	const refreshTasks = () => {
 		localStorage.removeItem('tasks');
 		localStorage.removeItem('date');
