@@ -16,7 +16,7 @@ const Settings = () => {
 	}
 
 	return <div>
-		<div className='animation-fade-in text-center shadow-xl lg:text-4xl font-light bg-gradient my-5 mx-20 rounded-full p-3'>SETTINGS</div>
+		<div className='animate-fade-in opacity-0 text-center shadow-xl lg:text-4xl font-light bg-gradient my-5 mx-20 rounded-full p-3'>SETTINGS</div>
 		<div className='mx-20 p-3 font-light'>
 			Total tasks per day (max 5): <input value={totalTasksNum} className='bg-grey rounded text-center outline-none' type="number" min={1} max={5} onChange={updateTotalTasksNum} />
 		</div>
