@@ -17,3 +17,30 @@ body {
 .bg-gradient {
 	background-image: linear-gradient(to bottom right, #AD8B73, #E3CAA5);
 }
+
+.animation-bounce-in {
+  opacity: 0;
+  animation: bounce-in 0.5s forwards;
+}
+
+.animation-fade-in {
+  opacity: 0;
+  animation: fade-in 1s forwards;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+  }
+}

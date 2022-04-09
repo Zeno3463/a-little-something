@@ -30,7 +30,7 @@ const TaskList = () => {
 
 	return <div>
 		<table>
-			{tasks.map((task, index) => <tr key={index}>
+			{tasks.map((task, index) => <tr key={index} className='animation-bounce-in' style={{animationDelay: `${index/9}s`}}>
 				<td className='py-5 font-light border lg:border-0 text-center lg:text-left'>{!task.done ? task.name: <s>{task.name}</s>}</td>
 				{!task.done ?
 				<td className='pl-10 border lg:border-0'>
