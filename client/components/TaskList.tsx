@@ -27,14 +27,8 @@ const TaskList = () => {
 		localStorage.setItem('tasks', JSON.stringify(newTasks));
 	}
 
-	const refreshTasks = () => {
-		localStorage.removeItem('tasks');
-		localStorage.removeItem('date');
-		window.location.reload();
-	}
 
 	return <div>
-		<button onClick={refreshTasks}>refresh</button>
 		<table>
 			{tasks.map((task, index) => <tr key={index}>
 				<td className='py-5 font-light border lg:border-0 text-center lg:text-left'>{!task.done ? task.name: <s>{task.name}</s>}</td>
