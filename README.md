@@ -17,7 +17,7 @@ A little something is a website that gets you out of your comfort zone.
 
 Everyday, this website will have a list of tasks for you to complete. Try to complete all of them before the end of the day!
 
-Try it out <a href="" target="_blank">here</a>!
+Try it out <a href="https://a-little-something.vercel.app/" target="_blank">here</a>!
 
 ## 📷 Screenshots
 ![img](https://i.imgur.com/1R9ddkB.png)
