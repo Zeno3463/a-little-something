@@ -12,6 +12,10 @@ const Menu = () => {
 
 	////// FUNCTIONS //////
 	const refreshTasks = () => {
+		if (!localStorage.getItem('alerted')) {
+			if (!confirm('This will reset all your tasks for the day. Are you sure?')) return;
+			localStorage.setItem('alerted', 'true');
+		}
 		localStorage.removeItem('tasks');
 		localStorage.removeItem('date');
 		window.location.reload();

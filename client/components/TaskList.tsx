@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import list from '../data/list.json'
 import { TaskInterface } from '../interfaces';
+import TaskDonePopUp from './TaskDonePopUp';
 
 const TaskList = () => {
 	////// VARIABLES //////
 	const [tasks, setTasks] = useState<Array<TaskInterface>>([]);
+	const [allTasksAreDone, setAllTasksAreDone] = useState(false);
 
 	////// USE EFFECTS //////
 	useEffect(() => {
@@ -31,6 +33,8 @@ const TaskList = () => {
 		newTasks[index].done = !newTasks[index].done;
 		setTasks(newTasks);
 		localStorage.setItem('tasks', JSON.stringify(newTasks));
+		for (let i = 0; i < newTasks.length; i++) if (!newTasks[i].done) return;
+		setAllTasksAreDone(true);
 	}
 
 	return <div>
@@ -45,6 +49,7 @@ const TaskList = () => {
 				</td> : null}
 			</tr>)}
 		</table>
+		{allTasksAreDone ? <TaskDonePopUp /> : null}
 	</div>
 }
 
